@@ -49,3 +49,10 @@ public class UserController {
 //accepting a string(which is the message you want to print) and calling the super() with the received string as parameter
 // and add the annotation @ResponseStatus(code=HttpResponse.NOT_FOUND).
 
+
+//If you want to customise the format of the response u return, then create a class with the fields as the components of the
+//format u need, then add constructor, getters and setters just like creating a bean. and then extend it from the
+//ResponseEntityExceptionHandler class which is an inbuilt class of spring to handle all exceptions. then override the method
+//handleException and then customise it and return the configured ResponseEntity.(Dont forget to change the name of the method you
+//override, the method name cant be the same.
+
