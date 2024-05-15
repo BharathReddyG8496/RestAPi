@@ -1,5 +1,9 @@
 package com.bharath.rest.webservices.restfulwebservices.User;
 
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
+
 import java.time.LocalDate;
 
 
@@ -7,8 +11,9 @@ public class User {
 
     private Integer id;
 
+    @NotBlank(message = " The name should not be blank ")
     private String name;
-
+    @PastOrPresent(message = " BirthDate should be past or present ")
     private LocalDate birthDate;
 
     @Override

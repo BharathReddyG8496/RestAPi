@@ -1,12 +1,12 @@
 package com.bharath.rest.webservices.restfulwebservices.User;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 
 @RestController
@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<User> AddUser(@RequestBody User user){
+    public ResponseEntity<User> AddUser(@Valid @RequestBody User user){
        User savedUser= userDaoService.SaveUser(user);
         URI url=ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();
         return ResponseEntity.created(url).build();
@@ -54,5 +54,7 @@ public class UserController {
 //format u need, then add constructor, getters and setters just like creating a bean. and then extend it from the
 //ResponseEntityExceptionHandler class which is an inbuilt class of spring to handle all exceptions. then override the method
 //handleException and then customise it and return the configured ResponseEntity.(Dont forget to change the name of the method you
-//override, the method name cant be the same.
+//override, the method name cant be the same  and add the annotation @ResponseStatus and inside it set it to handle all exceptions
+//by putting Exception.class. And for the class add the ControllerAdvice annotation(used for exception handling, specialisation
+//of component class.
 
