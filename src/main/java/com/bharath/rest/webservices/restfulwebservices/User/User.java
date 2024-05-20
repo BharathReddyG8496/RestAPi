@@ -1,20 +1,39 @@
 package com.bharath.rest.webservices.restfulwebservices.User;
 
-import jakarta.validation.constraints.FutureOrPresent;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
 
+
 import java.time.LocalDate;
+import java.util.List;
 
-
+@Entity(name = "User_details")
 public class User {
-
+    @Id
+    @Column(name = "User_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @NotBlank(message = " The name should not be blank ")
+    @Column(name="User_name")
     private String name;
     @PastOrPresent(message = " BirthDate should be past or present ")
     private LocalDate birthDate;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Posts> postsList;
+
+    public User() {
+
+    }
+
+    public List<Posts> getPostsList() {
+        return postsList;
+    }
 
     @Override
     public String toString() {
